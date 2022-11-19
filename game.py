@@ -68,6 +68,12 @@ class Player():
             Army[1]=
             Army[3]=
 
+class Enemy():
+    def __init__(self):
+    self.loot=10
+    self.Army=ObjectMatrix(2)
+
+
 
         
 
@@ -75,20 +81,6 @@ class Player():
 
      
 
-
-
-
-
-
-class Battle():
-    def __init__(self,player_army,enemy_army):
-        queue = []
-        for i in player_army:
-            queue.append(i)
-        for i in enemy_army:
-            queue.append(i)
-        
-        queue.sort(key=lambda x: x.initiative, reverse=True)
 
 
 
