@@ -76,6 +76,7 @@ class MuszkieterSzwedzki(Infranty):
         self.texture=""
         self.name = "Muszkieter Szwedzki"
 
+
 class PiechotaWybraniecka(Infranty):
 
 
@@ -102,6 +103,18 @@ class Husaria(Cavarly):
         self.affilation=af
         self.texture=""
         self.name = "Husaria"
+
+class Karakol(Cavarly):
+        def __init__(self,quan=1,af='p'):
+        self.attack=80
+        self.defence=80
+        self.initiative=20
+        self.max_hp=10
+        self.current_hp=10
+        self.quantity=quan
+        self.affilation=af
+        self.texture=""
+        self.name = "Karakol"
 
 class Kolubryna(Artilery):
         def __init__(self,quan=1,af='p'):
