@@ -2,7 +2,6 @@ import front, pygame, gameFile
 
 class game:
 
-    currentPosition = (0,0)
 
     def WSADPressed(self, event):
         if event.type != pygame.KEYDOWN:
@@ -28,9 +27,8 @@ class game:
                     break
                 elif event.type == pygame.KEYDOWN and keyName != None:
                     print('x', keyName)
-                    self.currentPosition = gameFile.check_before_move(self.currentPosition, keyName)
+                    gameFile.check_before_move(keyName)
                     front.draw()
-                    print(self.currentPosition)
 
 
     def __init__(

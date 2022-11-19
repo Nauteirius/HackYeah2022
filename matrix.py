@@ -47,7 +47,7 @@ class objectMatrix:
     
 
 
-class newList(list):
+class battleTable(list):
     __obj_count = 0
     def __init__(self, *args):
         self.__obj_count = 0
