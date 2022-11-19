@@ -4,7 +4,7 @@ class game:
 
     currentPosition = (0,0)
 
-    def WSADPressed(event):
+    def WSADPressed(self, event):
         if event.type == pygame.K_w:
             return "UP"
         elif event.type == pygame.K_a:
@@ -16,14 +16,14 @@ class game:
         else:
             return None
 
-    def eventLoop():
+    def eventLoop(self):
         while True:
             for event in pygame.event.get():
-                keyName = WSADPressed(event)
+                keyName = game.WSADPressed(self, event)
                 if event.type == pygame.QUIT:
                     break
                 elif event.type == pygame.KEYDOWN and keyName != None:
-                    check_before_move(self.currentPosition, keyName)
+                    game.check_before_move(self.currentPosition, keyName)
 
 
     def __init__(
@@ -34,8 +34,8 @@ class game:
                 ):
         front.init(windowSize, blockSize)
         self.currentPosition = startingPosition
-        eventLoop()
-        destroyWindow()
+        front.eventLoop()
+        front.destroyWindow()
      
     
 
