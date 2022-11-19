@@ -1,4 +1,4 @@
-class Army():
+class Army():#dac zmienna czy nalezy do 
         def __init__(self):
             self.attack
             self.defence
@@ -28,7 +28,8 @@ class MuszkieterSzwedzki(Infranty):
         self.attack=50
         self.defence=50
         self.initiative=10
-        self.hp=5
+        self.current_hp=5
+        self.current_hp=5
         self.quantity=1
         self.texture=""
         self.name = "Muszkieter Szwedzki"
@@ -40,7 +41,8 @@ class MuszkieterSzwedzki(Infranty):
         self.attack=50
         self.defence=30
         self.initiative=10
-        self.hp=5
+        self.current_hp=5
+        self.current_hp=5
         self.quantity=quan
         self.texture=""
         self.name = "Muszkieter Szwedzki"
@@ -50,7 +52,8 @@ class PiechotaWybraniecka(Infranty):
         self.attack=30
         self.defence=50
         self.initiative=10
-        self.hp=5
+        self.current_hp=5
+        self.current_hp=5
         self.quantity=1
         self.texture=""
         self.name = "Piechota Wybraniecka"
@@ -62,7 +65,8 @@ class PiechotaWybraniecka(Infranty):
         self.attack=30
         self.defence=50
         self.initiative=10
-        self.hp=5
+        self.max_hp=5
+        self.current_hp=5
         self.quantity=quan
         self.texture=""
         self.name = "Piechota Wybraniecka"
