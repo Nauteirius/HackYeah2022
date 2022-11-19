@@ -1,3 +1,5 @@
+import random
+
 class Battle():
     def __init__(self,player_army,enemy_army):
         self.queue = []
@@ -8,19 +10,20 @@ class Battle():
         
         self.queue.sort(key=lambda x: x.initiative, reverse=True)
 
-    def start_battle():
+    def start_battle(self,player_army,enemy_army):
         while(True):
-            currect = self.queue[0]
+            current = self.queue[0]
             
-            #jesli kolej gracza:
-            #currect.#jesli dziedziczy po piechocie
-            
-            if(wybor==enemymatrix[1] or wybor==enemymatrix[3]):
-                do_damage
             
 
+            #jesli kolej gracza:
+            if(current.affilation=="player"):
+                can_be_damaged= current.who_can_shot()
+                
+
+            #jesli kolej komputera
             else:
-                "zly wybor"
+                current.do_damage(random.choice(current.who_can_shot(player_army)),player_army)
 
     #matrix.frontdead()
     def end_battle(matrix):
@@ -31,6 +34,10 @@ class Battle():
             
 
     def do_damage(self,target,matrix):#matrix:player_army or enemy_army
+
+        #wykonaj animacje uderzenia
+        #zmien na czerwono na sekunde
+
         modifier = 1 # tymczasowo do zmiany pozniej
         damage=(self.attack/target.defence)*self.quantity * modifier
         deads=(damage+target.max_hp-target.current_hp)//target.max_hp
