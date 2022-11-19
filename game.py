@@ -75,7 +75,19 @@ class Enemy():
 
 
 
+class Event():
+    def __init__(self):
+        self.triggers=[]
+        self.army = [0,0,0,0]
 
+    
+
+
+    def monologue(tekst):
+        #
+    def(i)
+
+class
 
         
 

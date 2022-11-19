@@ -13,7 +13,7 @@ class Battle():
     def start_battle(self,player_army,enemy_army):
         while(True):
             current = self.queue[0]
-            
+
             
 
             #jesli kolej gracza:
@@ -24,6 +24,9 @@ class Battle():
             #jesli kolej komputera
             else:
                 current.do_damage(random.choice(current.who_can_shot(player_army)),player_army)
+
+            self.queue.append(current)
+            self.queue.pop(0)
 
     #matrix.frontdead()
     def end_battle(matrix):
