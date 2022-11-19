@@ -1,29 +1,36 @@
-import front, pygame, game
+import front, pygame, gameFile
 
 class game:
 
     currentPosition = (0,0)
 
     def WSADPressed(self, event):
-        if event.type == pygame.K_w:
+        if event.type != pygame.KEYDOWN:
+            return None
+        if event.key == pygame.K_w:
             return "UP"
-        elif event.type == pygame.K_a:
-            return "RIGHT"
-        elif event.type == pygame.K_d:
+        elif event.key == pygame.K_a:
             return "LEFT"
-        elif event.type == pygame.K_s:
+        elif event.key == pygame.K_d:
+            return "RIGHT"
+        elif event.key == pygame.K_s:
             return "DOWN"
         else:
             return None
 
     def eventLoop(self):
-        while True:
+        isRunning = True
+        while isRunning:
             for event in pygame.event.get():
                 keyName = game.WSADPressed(self, event)
                 if event.type == pygame.QUIT:
+                    isRunning = False
                     break
                 elif event.type == pygame.KEYDOWN and keyName != None:
-                    game.check_before_move(self.currentPosition, keyName)
+                    print('x', keyName)
+                    self.currentPosition = gameFile.check_before_move(self.currentPosition, keyName)
+                    front.draw()
+                    print(self.currentPosition)
 
 
     def __init__(
@@ -33,11 +40,13 @@ class game:
                 startingPosition
                 ):
         front.init(windowSize, blockSize)
+        front.draw()
         self.currentPosition = startingPosition
-        front.eventLoop()
+        self.eventLoop()
+        print('x')
         front.destroyWindow()
      
     
 
-if __name__ == "main":
-    game()
+if __name__ == "__main__":
+    game(30, 30, (0,0))

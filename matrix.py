@@ -4,8 +4,9 @@
 class objectMatrix:
     __firstDimention = []
     __size = 0
-    __object_count = 0
+    #__object_count = 0
     def __init__(self, size):
+        self.__firstDimention = []
         self.__size = size
         self.__object_count = 0
         for x in range(size):
@@ -14,8 +15,8 @@ class objectMatrix:
     def getSize(self):
         return self.__size
 
-    def getObjectCount(self):
-        return self.__object_count
+    #def getObjectCount(self):
+    #    return self.__object_count
 
     def belongsTo(self, object):
         for x in range(self.__size):
@@ -37,11 +38,11 @@ class objectMatrix:
                     newvalue
                     ):
         if (position[0] >= 0 and position[0] < self.__size) and (position[1] >= 0 and position[1] < self.__size):
-            val =  self.__firstDimention[position[0]][position[1]]
-            if val != 0 and newvalue == 0:
-                self.__object_count -= 0
-            elif val == 0 and newvalue != 0:
-                self.__object_count += 1
+      #      val =  self.__firstDimention[position[0]][position[1]]
+     #       if val != 0 and newvalue == 0:
+       #         self.__object_count -= 0
+        #    elif val == 0 and newvalue != 0:
+        #        self.__object_count += 1
             self.__firstDimention[position[0]][position[1]] = newvalue
     
 
@@ -50,8 +51,8 @@ class newList(list):
     __obj_count = 0
     def __init__(self, *args):
         self.__obj_count = 0
-        list__init__(self, *args)
-        
+        list.__init__(self, *args)
+
     def __setitem__(self, index, newvalue):
         if self[index] == 0 and newvalue != 0:
             self.__obj_count -= 1
