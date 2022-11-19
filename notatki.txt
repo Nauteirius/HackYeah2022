@@ -1,0 +1,38 @@
+konkretna wizja
+
+
+
+Projekt podzielony na małe taski, a każdy task podzielony na wersje od bardzo banalnej do bardziej profesjonalnej.
+zrobienie wszystkich taskow na ich najnizszej wersji wystarczy, żeby projekt byl zrealizowany. Od tego czasu można go ulepszać.
+testować zrobienie każdej wersji taska czy ona działa, szczególnie werji zerowej
+
+wyświetlanie szerokiego paska w dolnej czesci ekranu
+zaimplementować w formie metod które można wywołać
+
+poruszanie się po świecie
+może to być macierz(tablica obiektów), które rejestrują całą planszę, na której jest 5 stanów (w wersji i stanem domyślnym(puste pole na które można wejść)
+2.1 to większa ilość stanów, osobne lokacje do których można wejść, więc osobna macierz, np. jak chcemy wejść do jakiegoś dużego budynku, jaskini
+te stany będą obiektami, każdy rodzaj stanu jest osobną klasą.
+
+2.A1 liczba oznacza opcjonalnosc
+dziala to w ten sposob, że byłaby tablica 4 obiektów, reprezentująca slot, zawierałaby konkretną typ jednostki, np. kawaleria, statystyki tego typu jednostki, punkty zycia, liczebnosc,
+martwa jednostka = brak jednostki w danym miejscu
+wiec jesli zgina te w pierwszej linii to wtedy piechurzy moga atakowac tych na tylach
+
+
+2.A2
+Dodanie flank, realism, historyczne typy jednostek i ich statystyki i synergia. dzialanie zgodnie z taktyką w ówczesnych czasach
+2B.okno z ekwipunek, opcja pozyskiwania jednostek, zlota
+
+3.0 podstawowy gameplay, cel gry
+przejscie z punktu a do b, mapa jest gotowa
+zbudować mapę w pancie, pomyśleć o wydarzeniach które mogą się dziać aby był jakiś gameplay
+
+
+
+
+4.0jest menu, są jakiekkolwiek tekstóry (same kwadraty w jakiś kolorach), przez co da się grać, sprawdzenie czy moduły dało się połączyć
+.1 są tekstury animowane, jest estetyczne menu główne, grafikę już jest przygotowana, tylko zaimplementowanie zostaje.
+.2 program wrzucony na localhost, może działać w internecie
+
+5. inne dodatkowe rzeczy, jak gra będzie się odpalać to można je dodać
