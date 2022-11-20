@@ -31,33 +31,33 @@ class Infranty(Army):
         #
         #####################################
 
-        if(matrix[1]==0 and matrix[3]==0):
-            if(matrix[0]==0):
+        if(matrix[1].name=="zero" and matrix[3].name=="zero"):
+            if(matrix[0].name=="zero"):
                 return [2]
-            if(matrix[2]==0):
+            if(matrix[2].name=="zero"):
                 return [0]
             else: return [2,4]
         else:
-            if(matrix[1]==0):
+            if(matrix[1].name=="zero"):
                 return [3]
-            if(matrix[3]==0):
+            if(matrix[3].name=="zero"):
                 return [1]
             else: return [1,3]
 
 
 
 class Cavarly(Army):
-    def who_can_shot(matrix):
+    def who_can_shot(self,matrix):
         result = []
         for i,j in enumerate(matrix):
-            if(j!=0):result.append(i)
+            if(j.name!="zero"):result.append(i)
         return result
 
 class Artilery(Army):
-    def who_can_shot(matrix):
+    def who_can_shot(self,matrix):
         result = []
         for i,j in enumerate(matrix):
-            if(j!=0):result.append(i)
+            if(j.name!="zero"):result.append(i)
         return result
 
 
@@ -127,5 +127,6 @@ class Kolubryna(Artilery):
         self.affilation=af
         self.texture=""
         self.name = "Kolubryna"
+
 
 

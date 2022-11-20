@@ -62,9 +62,12 @@ mapMatrix = matrix.objectMatrix(mapSize,0)
 for x in range(mapSize):
     for y in range(mapSize):
         mapMatrix[(x,y)] = Map[y*mapSize + x]
-        if(y==2):
-            print(mapMatrix[(x,y)])
+        #if(y==2):
+            #print(mapMatrix[(x,y)])
+mapMatrix[4,14]=5
+mapMatrix[4,15]=5
+mapMatrix[23,16]=5
+mapMatrix[23,17]=5
 
-
-textureAmount = 8
+textureAmount = 10
 textureFiles = [ 'texture' + str(i) +'.png' for i in range(textureAmount) ]

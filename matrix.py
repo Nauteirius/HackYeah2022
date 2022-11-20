@@ -49,7 +49,8 @@ class objectMatrix:
 
 class battleTable(list,):
     __obj_count = 0
-    def __init__(self, *args,owner='p'):#WAZNE
+    def __init__(self, *args,owner='p',quantity=0):#WAZNE
+        self.quantity=quantity
         self.__obj_count = 0
         list.__init__(self, *args)
         self.owner=owner#WAZNE
@@ -60,3 +61,8 @@ class battleTable(list,):
         elif self[index] != 0 and newvalue == 0:
             self.__obj_count += 1
         list.__setitem__(self,index,newvalue)
+
+    def get_coordinates(self,item):
+        for i,j in enumerate(self):# SPRAWDZIC CZY TO DZIALA!!!
+            if(item==j):
+                return i

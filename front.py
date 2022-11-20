@@ -20,14 +20,25 @@ class frontPlayer:
     def move(self, destination):
         self.__position = destination
 
+class frontNPC:
+    def __init__(self, initialPosition, textureCode):
+        self.__position = initialPosition
+        self.__textureCode = textureCode
+    
+    def draw(self):
+        DisplayHandler.blit(textures[self.__textureCode], (self.__position[0]*fieldSize, self.__position[1]*fieldSize))
+
+
 def init(
         windowSize,
         blockSize
         ):
-    global DisplayHandler, textures, player
+    global DisplayHandler, textures, player, npc_monologue1,npc_battle1
     DisplayHandler = pygame.display.set_mode((windowSize*blockSize, windowSize*blockSize))
     DisplayHandler.fill(background_colour)
     player = frontPlayer(INITIAL_PLAYER_POSITION, 0)
+    npc_monologue1=frontNPC((5,2),8)
+    npc_battle1=frontNPC((4,14),9)
     textures = [pygame.transform.scale(pygame.image.load(map.textureFiles[i]), DEFAULT_IMAGE_SIZE)  for i in range(map.textureAmount)]
 
 
@@ -38,6 +49,8 @@ def draw():
             #textures[map.mapMatrix[(x,y)]] #tu sie wywala
             DisplayHandler.blit(textures[map.mapMatrix[(x,y)]], (x * fieldSize, y * fieldSize))
     player.draw()
+    npc_monologue1.draw()
+    npc_battle1.draw()
 
     pygame.display.flip()
     pygame.display.update()

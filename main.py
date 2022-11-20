@@ -3,6 +3,12 @@ import front, pygame, gameFile
 class game:
 
 
+    def Otherkeys(self,event):
+        if event.type != pygame.K_e:
+            pass #OPEN INVENTORY
+        #WE FRONCIE ZROBIC INVENTORY TO JUZ JEST W BACKENDZIE
+        #OKNO POKAZUJE ILOSC ZLOTA, I ARMIE (4 IKONKI, MOZNA ZMIENIAC POLOZENIE JEDNOSTEK W ARMII (czyli w tablicy 4 ))
+
     def WSADPressed(self, event):
         if event.type != pygame.KEYDOWN:
             return None

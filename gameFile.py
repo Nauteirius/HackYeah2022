@@ -21,7 +21,52 @@ class Blockade():#ustawic po prostu na wszystkie obiekty na ktore sie nie da wch
 class Zeros():
     def __init__(self):
         self.type="free"
+        self.quantity=0
+        self.name="zero"
 
+
+class Event():
+    def __init__(self,enemy_team=matrix.battleTable([Zeros(),Zeros(),Zeros(),Zeros()])):
+        self.type="event"
+        self.triggers=[]
+        self.army = enemy_team
+        self.monologue=""
+        self.dialogue=""
+
+
+
+    #def 
+    
+    def trigger_event(**kwargs):
+        pass
+        
+
+    def trigger_monologe(self):#zwykly monolog
+        print(self.monologue)
+      
+        #wyswietla okno z tekstem
+    def trigger_dialogue(self):#monolog + wybor gracza odpowiedzi
+        print(self.dialogue)
+    
+    def trigger_battle(self):#enemy_coordinates
+        #battle_start
+        
+
+      
+        skirmish=battle.Battle(player.team,self.army)      
+        #koniec bitwy, ustawimy nazwe eventu na Zero to moze zadziala
+        self.type="VirtualZero"
+        #object_matrix[enemy_coordinates]=Zeros() #przeciwnik znika
+
+    def handle_event(self):
+        for i in self.triggers:
+            if(i=='m'):
+                self.trigger_monologe()
+            if(i=='d'):
+                self.trigger_dialogue(self.dialogue)
+            if(i=='b'):
+                #print(self.army[0].name + "TESTTT") dotad wlacznie dziala
+                self.trigger_battle()
 
 
 
@@ -31,9 +76,12 @@ class Player():
 
             #object_matrix[self.curr_pos]=self
             self.gold=10
-            self.team=matrix.battleTable([0,0,0,0])
-            #self.team[1]=army.PiechotaWybraniecka()
-            #self.team[3]=army.PiechotaWybraniecka()
+            self.team=matrix.battleTable([Zeros(),Zeros(),Zeros(),Zeros()])
+            self.team[0]=army.Husaria(5)
+            self.team[1]=army.PiechotaWybraniecka(10)
+            self.team[2]=army.Kolubryna(1)
+            self.team[3]=army.PiechotaWybraniecka(10)
+            self.team.quantity=4
 
 
 map_event=[Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
@@ -77,22 +125,28 @@ def begin_game():
     for x in range(mapSize):
         for y in range(mapSize):
             object_matrix[(x,y)] = map_event[y*mapSize + x]
-            # if(y==2):
-            #     print(object_matrix[(x,y)])
-
-
-
-    #######################################################################################
-    #object_matrix[]
-
-
-
-
-    ######################################################################################
     global player
     player=Player(object_matrix)
-    #b1=Blockade((2,2))
 
+
+
+    """Deklaracja eventow"""
+    event_battle1=Event(matrix.battleTable([army.Karakol(3,'k'),army.MuszkieterSzwedzki(5,'k'),Zeros(),Zeros()]))
+    event_battle1.owner='k'
+    event_battle1.quantity=2
+    event_battle1.triggers.append('m')
+    event_battle1.monologue="FOR GUSTAVUS ADOLFUS!!!!!"
+    event_battle1.triggers.append('b')
+    object_matrix[(4,13)]=event_battle1
+
+    event_monologe1=Event()
+    event_monologe1.monologue=("Doszly nasz sluchy wojska szwedzkie doszczednie zlupily okoliczna wioske, biada nam")
+    event_monologe1.triggers.append('m')
+    object_matrix[(5,2)]=event_monologe1
+
+
+
+    """ """
 
 
 class Game(object):
@@ -142,7 +196,7 @@ def check_before_move(direction):
     #sprawdzanie czy natrafiamy na event zdarzen
     if object_matrix[xpos,ypos].type=="event":
         #do event
-        return
+        object_matrix[xpos,ypos].handle_event()
     #    handle_event(object_matrix[xpos,ypos])
 
     #wywoalaj te zdarzenie
@@ -155,9 +209,7 @@ def check_before_move(direction):
         return xpos,ypos
 
 
-def handle_event(event):
-    #event.
-    pass
+
 #matr
 
 
@@ -175,35 +227,8 @@ def handle_event(event):
 
 
 
-class Event():
-    def __init__(self,cordinates,enemy_team=matrix.battleTable([0,0,0,0])):
-        self.type="event"
-        self.triggers=[]
-        self.army = enemy_team
 
 
-
-    #def 
-    
-    def trigger_event(**kwargs):
-        pass
-        
-
-    def trigger_monologe(text):
-        pass
-        #wyswietla okno z tekstem
-    def trigger_dialogue(text):
-        pass
-    
-    def trigger_battle(self,enemy_army,enemy_coordinates):
-        #battle_start
-        
-
-      
-        battle=battle.start_battle(player.team,enemy_army)      
-        #koniec bitwy, ustawimy nazwe eventu na Zero to moze zadziala
-        self.type="VirtualZero"
-        object_matrix[enemy_coordinates]=Zeros() #przeciwnik znika
 # class Event():
 #     def __init__(self):
 #         self.triggers=[]
