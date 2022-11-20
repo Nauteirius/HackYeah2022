@@ -1,8 +1,9 @@
 from time import sleep
-import random#, import gameFile
+import random battleFront#, import gameFile
 
 class Battle():
-    def __init__(self,player_army,enemy_army):
+    def __init__(self,player_army,enemy_army, windowHandle):
+        self.__windowHandle = windowHandle
         self.queue = []
         self.battle_ended=0
         for i in player_army:
@@ -18,6 +19,7 @@ class Battle():
 
     def start_battle(self,player_army,enemy_army):
         #print("BATTLE STARTED")
+        API = battleFront.BattleFront(self.__windowHandle)
         while(self.battle_ended==0):
             current = self.queue[0]
 
@@ -33,12 +35,13 @@ class Battle():
                 #mozesz wybrac jedno z okienek na ktore wskazuje zmienna can_be_damaged,
                 #if() wybrales opcje ta - wtedy zycie traci ten
                 #czyli petla
+                API.chooseEnemyUnit()
 
             #jesli kolej komputera
             else:
                 self.do_damage(current,player_army[random.choice(current.who_can_shot(player_army))],player_army)
                 sleep(1)
-
+            API.draw([i.texture for i in player_army], [i.texture for i in enemy_army], [i.texture for i in self.queue])
             self.queue.append(current)
             self.queue.pop(0)
 
