@@ -32,7 +32,7 @@ class game:
                     isRunning = False
                     break
                 elif event.type == pygame.KEYDOWN and keyName != None:
-                    print('x', keyName)
+                    #print('x', keyName)
                     gameFile.check_before_move(keyName)
                     front.draw()
 
@@ -48,7 +48,7 @@ class game:
         front.draw()
         self.currentPosition = startingPosition
         self.eventLoop()
-        print('x')
+        #print('x')
         front.destroyWindow()
      
     

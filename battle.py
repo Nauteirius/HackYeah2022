@@ -11,20 +11,21 @@ class Battle():
         for i in enemy_army:
             if(i.name=="zero"):continue
             self.queue.append(i)
-            print(i.name)
+            #print(i.name)
         
         self.queue.sort(key=lambda x: x.initiative, reverse=True)
         self.start_battle(player_army,enemy_army)#zacznij bitwe
 
     def start_battle(self,player_army,enemy_army):
-        print("BATTLE STARTED")
+        #print("BATTLE STARTED")
         while(self.battle_ended==0):
             current = self.queue[0]
 
             sleep(1)
-            print("ITS STILL GOING")
+            #print("ITS STILL GOING")
             for test in self.queue:
-                print (test.name)
+                pass
+                #print (test.name)
 
             #jesli kolej gracza:
             if(current.affilation=='p'):
@@ -44,7 +45,7 @@ class Battle():
     #matrix.frontdead()
     def end_battle(self,matrix):
         self.battle_ended=1
-        if matrix.owner=='k':
+        if matrix.owner=='k':#pokonany komputer
             print("victory")
             sleep(2)
             print("victory")
@@ -53,7 +54,7 @@ class Battle():
             self.game_over()
             
 
-    def game_over():
+    def game_over(self):
         while(True):
             print("GAME OVER")
     #display window which says przegrana
@@ -68,7 +69,7 @@ class Battle():
         deads=(damage+target.max_hp-target.current_hp)//target.max_hp
         target.current_hp=damage%target.max_hp
         target.quantity-=deads
-        print(we.name , "zadal: ",damage, " " , target.name , ", zabil " , deads ,", zostalo przy zyciu: " , target.quantity)
+        print(we.name , "zadal: ",damage, "obrazen " , target.name , ", zabil " , deads ,", zostalo przy zyciu: " , target.quantity)
         if target.quantity<=0:
             target.quantity=0
             #dead unit!!

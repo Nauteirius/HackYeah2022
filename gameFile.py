@@ -11,6 +11,22 @@ object_matrix=None
 player = None
 
 
+background_colour = (255, 255, 255)
+DisplayHandler = None
+fieldSize = 30
+class Window():
+    def __init__(self, initialPosition, size):
+        self.__position = initialPosition
+        self.size=size
+        #self.__textureCode = textureCode
+    
+    def draw(self):
+        #DisplayHandler.blit( (self.__position[0]*50, self.__position[1]*50))
+        DisplayHandler = pygame.display.set_mode((10*self.size, 10*self.size))
+
+    def move(self, destination):
+        self.__position = destination
+
 
 class Blockade():#ustawic po prostu na wszystkie obiekty na ktore sie nie da wchodzic, czyli rzeki, drzewa, budynki(poza drzwiami do nich - tam bedzie event)
     def __init__(self):
@@ -43,6 +59,9 @@ class Event():
 
     def trigger_monologe(self):#zwykly monolog
         print(self.monologue)
+        ehh=Window((4,14),50)
+        # while(True):
+        #     ehh.draw()
       
         #wyswietla okno z tekstem
     def trigger_dialogue(self):#monolog + wybor gracza odpowiedzi
@@ -62,11 +81,17 @@ class Event():
         for i in self.triggers:
             if(i=='m'):
                 self.trigger_monologe()
+                self.triggers.pop(0)
             if(i=='d'):
                 self.trigger_dialogue(self.dialogue)
+                self.triggers.pop(0)
             if(i=='b'):
                 #print(self.army[0].name + "TESTTT") dotad wlacznie dziala
                 self.trigger_battle()
+                self.triggers.pop(0)
+            if(i=='w'):
+                print("Ostatecznie zwyciestwo zostalo osiagniecie, koniec gry")
+                
 
 
 
@@ -145,6 +170,44 @@ def begin_game():
     object_matrix[(5,2)]=event_monologe1
 
 
+    event_monologe2=Event()
+    event_monologe2.monologue=("Wojska nieprzyjaciela zbierają się po drugiej stronie rzeki, to ostatnia nasza szansa by ich rozbić, zanim będą zbyt si")
+    event_monologe2.triggers.append('m')
+    object_matrix[(12,13)]=event_monologe2
+
+
+    event_battle2=Event(matrix.battleTable([army.Karakol(3,'k'),army.MuszkieterSzwedzki(5,'k'),army.Kolubryna(2,'k'),army.Karakol(5,'k')]))
+    event_battle2.owner='k'
+    event_battle2.quantity=4
+    event_battle2.triggers.append('m')
+    event_battle2.monologue="FOR GUSTAVUS ADOLFUS, AVEEEEEEE!!!!!"
+    event_battle2.triggers.append('b')
+    event_battle2.triggers.append('w')
+    object_matrix[(4,27)]=event_battle2
+    object_matrix[(2,27)]=event_battle2
+    object_matrix[(3,28)]=event_battle2
+    object_matrix[(3,26)]=event_battle2
+
+
+    event_battle3=Event(matrix.battleTable([army.Karakol(3,'k'),army.MuszkieterSzwedzki(5,'k'),Zeros(),army.MuszkieterSzwedzki(4,'k')]))
+    event_battle3.owner='k'
+    event_battle3.quantity=3
+    event_battle3.triggers.append('m')
+    event_battle3.monologue="PRZYGOTUJ SIĘ NA ŚMIERĆ HERETYKU!!!!!"
+    event_battle3.triggers.append('b')
+    object_matrix[(23,19)]=event_battle3
+    object_matrix[(25,19)]=event_battle3
+    object_matrix[(24,20)]=event_battle3
+    object_matrix[(24,18)]=event_battle3
+    
+
+
+    
+
+
+
+
+
 
     """ """
 
@@ -178,8 +241,8 @@ def check_before_move(direction):
     
     
     #sprawdzanie czy nie wychodzimy poza macierz
-    print(player.curr_pos ,  " OK")
-    print(correction , " OK22222")
+    #print(player.curr_pos ,  " OK")
+    #print(correction , " OK22222")
 
     xpos,ypos = (player.curr_pos[0]+correction[0], player.curr_pos[1] + correction[1])
     
@@ -188,7 +251,7 @@ def check_before_move(direction):
     #object_matrix = matrix.objectMatrix(MAIN_MAP_DIMENTION)
 
     #prawdzanie czy natrafiamy na obiekt blokujacy
-    print("xPos,yPos: " ,object_matrix[(xpos,ypos)])
+    #print("xPos,yPos: " ,object_matrix[(xpos,ypos)])
 
     if object_matrix[(xpos,ypos)].type=="blockade":
         return player.curr_pos
