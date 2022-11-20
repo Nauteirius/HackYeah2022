@@ -9,6 +9,7 @@ class Battle():
             self.queue.append(i)
         
         self.queue.sort(key=lambda x: x.initiative, reverse=True)
+        self.start_battle(self,player_army,enemy_army)#zacznij bitwe
 
     def start_battle(self,player_army,enemy_army):
         while(True):

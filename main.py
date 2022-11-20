@@ -37,7 +37,7 @@ class game:
                 blockSize,
                 startingPosition
                 ):
-        gameFile.beginGame()
+        gameFile.begin_game()
         front.init(windowSize, blockSize)
         front.draw()
         self.currentPosition = startingPosition

@@ -5,12 +5,12 @@ class objectMatrix:
     __firstDimention = []
     __size = 0
     #__object_count = 0
-    def __init__(self, size):
+    def __init__(self, size,default_state):
         self.__firstDimention = []
         self.__size = size
         self.__object_count = 0
         for x in range(size):
-            self.__firstDimention.append([0] * size)
+            self.__firstDimention.append([default_state] * size)
     
     def getSize(self):
         return self.__size
