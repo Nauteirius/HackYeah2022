@@ -1,6 +1,6 @@
 
-import pygame,sys, matrix, front
-#battle,army
+import pygame,sys, matrix, front, battle,army
+
 
 
 MAIN_MAP_DIMENTION = 30 #matrix of map size
@@ -9,6 +9,21 @@ BATTLE_SIZE=4
 
 object_matrix=None
 player = None
+
+
+
+class Blockade():#ustawic po prostu na wszystkie obiekty na ktore sie nie da wchodzic, czyli rzeki, drzewa, budynki(poza drzwiami do nich - tam bedzie event)
+    def __init__(self):
+        self.type="blockade"
+    #def __init__(self,cordinates):
+        #self.type="blockade"
+        #object_matrix[cordinates]=self
+class Zeros():
+    def __init__(self):
+        self.type="free"
+
+
+
 
 class Player():
         def __init__(self,object_matrix):
@@ -20,11 +35,63 @@ class Player():
             #self.team[1]=army.PiechotaWybraniecka()
             #self.team[3]=army.PiechotaWybraniecka()
 
+
+map_event=[Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Blockade(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),
+ Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),
+ Blockade(),Blockade(),Blockade(),Blockade(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Blockade(),Blockade(),Blockade(),Blockade(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Blockade(),Blockade(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),
+ Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Blockade(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),
+ Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Blockade(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros(),Zeros()]
+
+
+
 def begin_game():
+    mapSize=30
     global object_matrix
     object_matrix=matrix.objectMatrix(MAIN_MAP_DIMENTION,default_state=Zeros())
+
+    for x in range(mapSize):
+        for y in range(mapSize):
+            object_matrix[(x,y)] = map_event[y*mapSize + x]
+            # if(y==2):
+            #     print(object_matrix[(x,y)])
+
+
+
+    #######################################################################################
+    #object_matrix[]
+
+
+
+
+    ######################################################################################
     global player
     player=Player(object_matrix)
+    #b1=Blockade((2,2))
 
 
 
@@ -70,11 +137,12 @@ def check_before_move(direction):
     print("xPos,yPos: " ,object_matrix[(xpos,ypos)])
 
     if object_matrix[(xpos,ypos)].type=="blockade":
-        pass
+        return player.curr_pos
 
     #sprawdzanie czy natrafiamy na event zdarzen
     if object_matrix[xpos,ypos].type=="event":
-        pass
+        #do event
+        return
     #    handle_event(object_matrix[xpos,ypos])
 
     #wywoalaj te zdarzenie
@@ -92,13 +160,6 @@ def handle_event(event):
     pass
 #matr
 
-class Blockade():
-    def __init__(self,X,Y):
-        self.type="blockade"
-        object_matrix[(X,Y)]=self
-class Zeros():
-    def __init__(self):
-        self.type="free"
 
 
 
@@ -106,31 +167,43 @@ class Zeros():
 
 
 
-# class Enemy():
+
+# class NPC:
 #     def __init__(self):
 #     self.loot=10
 #     self.Army=ObjectMatrix(2)
 
 
 
-# class Event():
-#     def __init__(self,enemy_team=matrix.battleTable(4)):
-#         self.triggers=[]
-#         self.army = enemy_team
+class Event():
+    def __init__(self,cordinates,enemy_team=matrix.battleTable([0,0,0,0])):
+        self.type="event"
+        self.triggers=[]
+        self.army = enemy_team
 
 
 
+    #def 
     
-#     def trigger_event(kwargs**):
-#         pass
+    def trigger_event(**kwargs):
+        pass
         
 
-#     def trigger_monologe(text):
-#         pass
-#         #wyswietla okno z tekstem
+    def trigger_monologe(text):
+        pass
+        #wyswietla okno z tekstem
+    def trigger_dialogue(text):
+        pass
     
-#     def trigger_battle(self.army):
-#         battle=battle.start_battle(player.team,self.army)         
+    def trigger_battle(self,enemy_army,enemy_coordinates):
+        #battle_start
+        
+
+      
+        battle=battle.start_battle(player.team,enemy_army)      
+        #koniec bitwy, ustawimy nazwe eventu na Zero to moze zadziala
+        self.type="VirtualZero"
+        object_matrix[enemy_coordinates]=Zeros() #przeciwnik znika
 # class Event():
 #     def __init__(self):
 #         self.triggers=[]

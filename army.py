@@ -93,7 +93,7 @@ class PiechotaWybraniecka(Infranty):
 
 
 class Husaria(Cavarly):
-        def __init__(self,quan=1,af='p'):
+    def __init__(self,quan=1,af='p'):
         self.attack=180
         self.defence=80
         self.initiative=25
@@ -105,7 +105,7 @@ class Husaria(Cavarly):
         self.name = "Husaria"
 
 class Karakol(Cavarly):
-        def __init__(self,quan=1,af='p'):
+    def __init__(self,quan=1,af='p'):
         self.attack=80
         self.defence=80
         self.initiative=20
@@ -117,7 +117,7 @@ class Karakol(Cavarly):
         self.name = "Karakol"
 
 class Kolubryna(Artilery):
-        def __init__(self,quan=1,af='p'):
+    def __init__(self,quan=1,af='p'):
         self.attack=180
         self.defence=3
         self.initiative=3

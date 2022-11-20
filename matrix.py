@@ -47,11 +47,12 @@ class objectMatrix:
     
 
 
-class battleTable(list):
+class battleTable(list,):
     __obj_count = 0
-    def __init__(self, *args):
+    def __init__(self, *args,owner='p'):#WAZNE
         self.__obj_count = 0
         list.__init__(self, *args)
+        self.owner=owner#WAZNE
 
     def __setitem__(self, index, newvalue):
         if self[index] == 0 and newvalue != 0:
