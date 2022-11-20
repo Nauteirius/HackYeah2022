@@ -7,7 +7,7 @@ shiftVector = [0,0]
 fieldSize = 60
 displaySize = 15
 player = None
-INITIAL_PLAYER_POSITION = (3,3)
+INITIAL_PLAYER_POSITION = (2,2)
 textures = None
 DEFAULT_IMAGE_SIZE = (fieldSize, fieldSize)
 
@@ -71,12 +71,12 @@ def MovePlayer(currentPosition, destination):
     player.move(destination)
     if destination[0] + 2 >= displaySize + shiftVector[0] and destination[0] + 2 < map.mapMatrix.getSize():
         shiftVector[0] += 1
-    elif destination[0] - 2 <= shiftVector[0] and destination[0] - 2 >= 0:
+    elif destination[0] - 2 <= shiftVector[0] and destination[0] - 2 > 0:
         shiftVector[0] -= 1
 
     if destination[1] + 2 >= displaySize + shiftVector[1] and destination[1] + 2 < map.mapMatrix.getSize():
         shiftVector[1] += 1
-    elif destination[1] - 2 <= shiftVector[1] and destination[0] - 2 >= 0:
+    elif destination[1] - 2 <= shiftVector[1] and destination[1] - 2 > 0:
         shiftVector[1] -= 1
     print(shiftVector)
     print(player._frontPlayer__position)
