@@ -3,9 +3,11 @@ import map, pygame
 
 background_colour = (255, 255, 255)
 DisplayHandler = None
-fieldSize = 30
+shiftVector = [0,0]
+fieldSize = 60
+displaySize = 15
 player = None
-INITIAL_PLAYER_POSITION = (0,0)
+INITIAL_PLAYER_POSITION = (3,3)
 textures = None
 DEFAULT_IMAGE_SIZE = (fieldSize, fieldSize)
 
@@ -17,7 +19,7 @@ class frontPlayer:
         self.__textureCode = textureCode
     
     def draw(self):
-        DisplayHandler.blit(textures[self.__textureCode], (self.__position[0]*fieldSize, self.__position[1]*fieldSize))
+        DisplayHandler.blit(textures[self.__textureCode], ((self.__position[0] - shiftVector[0])*fieldSize, (self.__position[1] - shiftVector[1])*fieldSize))
 
     def move(self, destination):
         self.__position = destination
@@ -28,7 +30,7 @@ class frontNPC:
         self.__textureCode = textureCode
     
     def draw(self):
-        DisplayHandler.blit(textures[self.__textureCode], (self.__position[0]*fieldSize, self.__position[1]*fieldSize))
+        DisplayHandler.blit(textures[self.__textureCode], ((self.__position[0] - shiftVector[0])*fieldSize, (self.__position[1] - shiftVector[1])*fieldSize))
 
 
 def init(
@@ -49,11 +51,10 @@ def init(
 
 
 def draw():
-    for x in range(map.mapMatrix.getSize()):
-        for y in range(map.mapMatrix.getSize()):
-            #print(map.mapMatrix[(x,y)])
-            #textures[map.mapMatrix[(x,y)]] #tu sie wywala
-            DisplayHandler.blit(textures[map.mapMatrix[(x,y)]], (x * fieldSize, y * fieldSize))
+    DisplayHandler.fill(background_colour)
+    for x in range(shiftVector[0], displaySize + shiftVector[0]):
+        for y in range(shiftVector[1], displaySize + shiftVector[1]):
+            DisplayHandler.blit(textures[map.mapMatrix[(x,y)]], ((x - shiftVector[0]) * fieldSize, (y - shiftVector[1]) * fieldSize))
     player.draw()
     npc_monologue1.draw()
     npc_battle1.draw()
@@ -68,3 +69,14 @@ def draw():
 def MovePlayer(currentPosition, destination):
     #print(destination)
     player.move(destination)
+    if destination[0] + 2 >= displaySize + shiftVector[0] and destination[0] + 2 < map.mapMatrix.getSize():
+        shiftVector[0] += 1
+    elif destination[0] - 2 <= shiftVector[0] and destination[0] - 2 >= 0:
+        shiftVector[0] -= 1
+
+    if destination[1] + 2 >= displaySize + shiftVector[1] and destination[1] + 2 < map.mapMatrix.getSize():
+        shiftVector[1] += 1
+    elif destination[1] - 2 <= shiftVector[1] and destination[0] - 2 >= 0:
+        shiftVector[1] -= 1
+    print(shiftVector)
+    print(player._frontPlayer__position)
