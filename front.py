@@ -3,7 +3,7 @@ import map, pygame
 
 background_colour = (255, 255, 255)
 DisplayHandler = None
-fieldSize = 60
+fieldSize = 30
 player = None
 INITIAL_PLAYER_POSITION = (0,0)
 textures = None
