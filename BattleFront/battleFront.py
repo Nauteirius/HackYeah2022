@@ -14,15 +14,15 @@ class BattleFront():
 
         imagePlayerUnit = []
         for i in range(0,3):
-            imagePlayerUnit[i] = pygame.image.load(player_army_strings[i])
+            imagePlayerUnit[i] = pygame.image.load(player_army_strings[i].texture)
 
         imageEnemyUnit = []
         for i in range(0,3):
-            imageEnemyUnit[i] = pygame.image.load(enemy_army_strings[i])
+            imageEnemyUnit[i] = pygame.image.load(enemy_army_strings[i].texture)
 
         imageQueue = []
         for i in range(0,7):
-            imageQueue[i] = pygame.image.load(queue_strings[i])
+            imageQueue[i] = pygame.image.load(queue_strings[i].texture)
 
         #wypisuje kolejke
         queueLevel = 4
@@ -51,4 +51,5 @@ class BattleFront():
         self.displayHandle.blit(imageEnemyUnit[3],
                                 ((beginWeightPlayerArmy + 1) * squareSize, (beginHeightPlayerArmy + 1) * squareSize))
 
+        self.displayHandle.flip()
     def chooseEnemyUnit(self):
